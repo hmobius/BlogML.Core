@@ -22,20 +22,20 @@ namespace BlogML.Core.Xml
 
         [XmlArray("extended-properties")]
         [XmlArrayItem("property", typeof(Pair<string, string>))]
-        public ExtendedPropertiesCollection ExtendedProperties { get; private set; } = new ExtendedPropertiesCollection();
+        public ExtendedPropertiesCollection ExtendedProperties { get;  } = new ExtendedPropertiesCollection();
 
         [XmlArray("authors")]
         [XmlArrayItem("author", typeof(BlogMLAuthor))]
-        public AuthorCollection Authors { get; private set; } = new AuthorCollection();
+        public AuthorCollection Authors { get;  } = new AuthorCollection();
 
 
         [XmlArray("posts")]
         [XmlArrayItem("post", typeof(BlogMLPost))]
-        public PostCollection Posts { get; private set; } = new PostCollection();
+        public PostCollection Posts { get;  } = new PostCollection();
 
         [XmlArray("categories")]
         [XmlArrayItem("category", typeof(BlogMLCategory))]
-        public CategoryCollection categories { get; private set; } = new CategoryCollection();
+        public CategoryCollection categories { get;  } = new CategoryCollection();
 
         [Serializable]
         public sealed class AuthorCollection : List<BlogMLAuthor> { }

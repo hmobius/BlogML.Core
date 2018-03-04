@@ -7,14 +7,6 @@ namespace BlogML.Core.Xml
     [Serializable]
     public sealed class BlogMLPost : BlogMLNode
     {
-        private BlogMLContent content = new BlogMLContent();
-        private BlogMLContent excerpt = new BlogMLContent();
-        private AuthorReferenceCollection authors;
-        private CommentCollection comments;
-        private TrackbackCollection trackbacks;
-        private CategoryReferenceCollection categories;
-        private AttachmentCollection attachments;
-
 		[XmlAttribute("post-url")]
 		public string PostUrl { get; set; }
 
@@ -38,16 +30,8 @@ namespace BlogML.Core.Xml
 
         [XmlArray("authors")]
         [XmlArrayItem("author", typeof(BlogMLAuthorReference))]
-        public AuthorReferenceCollection Authors
-        {
-            get
-            {
-                if (this.authors == null)
-                    this.authors = new AuthorReferenceCollection();
-                return this.authors;
-            }
-        }
-
+        public AuthorReferenceCollection Authors { get; } = new AuthorReferenceCollection();
+  
         [XmlArray("categories")]
         [XmlArrayItem("category", typeof(BlogMLCategoryReference))]
         public CategoryReferenceCollection Categories { get; }  = new CategoryReferenceCollection();
