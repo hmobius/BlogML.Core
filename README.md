@@ -1,4 +1,4 @@
-#BlogML.Core
+# BlogML.Core
 
 BlogML is an open XML standard for describing the contents of a blog.
 The original repo forBlogML is [here](https://code.google.com/archive/p/blogml/)
