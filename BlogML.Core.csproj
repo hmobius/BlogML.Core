@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Remove="lib\blogml.xsd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="lib\blogml.xsd" />
+  </ItemGroup>
+</Project>
