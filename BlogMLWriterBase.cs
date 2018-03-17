@@ -9,6 +9,7 @@ namespace BlogML.Core
     public abstract class BlogMLWriterBase
     {
         private const string BlogMLNamespace = "http://www.blogml.com/2006/09/BlogML";
+        private const string XMLSchemaNamespace = "http://www.w3.org/2001/XMLSchema";
 
         protected XmlWriter Writer
         {
@@ -56,15 +57,14 @@ namespace BlogML.Core
             string rootUrl,
             DateTime dateCreated)
         {
-            //WriteStartElement("blog");
-            Writer.WriteStartElement("blog", BlogMLNamespace); // fixes bug in Work Item 2004
+            Writer.WriteStartElement("blog", BlogMLNamespace);
 
             WriteAttributeStringRequired("root-url", rootUrl);
             WriteAttributeString("date-created", FormatDateTime(dateCreated));
 
             // Write the default namespace, identified as xmlns with no prefix
-            Writer.WriteAttributeString("xmlns", null, null, "http://www.blogml.com/2006/09/BlogML");
-            Writer.WriteAttributeString("xmlns", "xs", null, "http://www.w3.org/2001/XMLSchema");
+            Writer.WriteAttributeString("xmlns", null, null, BlogMLNamespace);
+            Writer.WriteAttributeString("xmlns", "xs", null, XMLSchemaNamespace);
 
             WriteContent("title", BlogMLContent.Create(title, titleContentType));
             WriteContent("sub-title", BlogMLContent.Create(subTitle, subTitleContentType));
@@ -286,9 +286,9 @@ namespace BlogML.Core
             WriteAttributeStringRequired("views", views.ToString());
             WriteContent("title", title);
             WriteContent("content", content);
-            if(postName != null)
+            if (postName != null)
                 WriteContent("post-name", BlogMLContent.Create(postName, ContentTypes.Text));
-            if(hasexcerpt)
+            if (hasexcerpt)
                 WriteContent("excerpt", excerpt);
         }
 
@@ -345,7 +345,8 @@ namespace BlogML.Core
             WriteComment(id, title, ContentTypes.Text, dateCreated, dateModified, approved, userName, userEmail, userUrl, content, ContentTypes.Text);
         }
 
-        protected void WriteComment(            string id,
+        protected void WriteComment(
+            string id,
             BlogMLContent title,
             DateTime dateCreated,
             DateTime dateModified,
@@ -354,7 +355,7 @@ namespace BlogML.Core
             string userEmail,
             string userUrl,
             BlogMLContent content
-)
+            )
         {
             WriteStartElement("comment");
             WriteNodeAttributes(id, dateCreated, dateModified, approved);
@@ -478,7 +479,6 @@ namespace BlogML.Core
 
             try
             {
-
                 WriteAttributeStringRequired("url", embeddedUrl);
 
                 if (size > 0)
@@ -515,7 +515,7 @@ namespace BlogML.Core
                 //Read returns 0 when reached end of stream.
                 if (bytesRead == 0)
                     break;
-                
+
                 dst.Write(buf, 0, bytesRead);
             }
         }
@@ -541,7 +541,7 @@ namespace BlogML.Core
                 // is it a full path
                 if (url.StartsWith("http://"))
                     return url.StartsWith(rootUrl);
-                
+
                 // it's local
                 return true;
             }
